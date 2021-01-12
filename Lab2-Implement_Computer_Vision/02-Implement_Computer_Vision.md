@@ -1,10 +1,10 @@
-# Lab 2 - Implement Computer Vision
+# Lab 1 - Implement Computer Vision
 
 ## Introduction
 
 We're going to build an end-to-end application that allows you to pull in your own pictures, use Cognitive Services to obtain a caption and some tags about the images. In later labs, we will build a Bot Framework bot using LUIS to allow easy, targeted querying of such images.
 
-## Lab 2.0: Objectives
+## Lab 1.0: Objectives
 
 In this lab, you will:
 
@@ -14,19 +14,18 @@ In this lab, you will:
 
 While there is a focus on Cognitive Services, you will also leverage Visual Studio 2019.
 
-> **Note** if you have not already, follow the directions for creating your Azure account, Cognitive Services, and getting your api keys in [Lab1-Technical_Requirements.md](../Lab1-Technical_Requirements/02-Technical_Requirements.md).
 
-## Lab 2.1: Architecture
+## Lab 1.1: Architecture
 
 We will build a simple C# application that allows you to ingest pictures from your local drive, then invoke the [Computer Vision API](https://www.microsoft.com/cognitive-services/en-us/computer-vision-api) to analyze the images and obtain tags and a description.
 
-In the continuation of this lab throughout the course, we'll show you how to query your data, and then build a [Bot Framework](https://dev.botframework.com/) bot to query it. Finally, we'll extend this bot with [LUIS](https://www.microsoft.com/cognitive-services/en-us/language-understanding-intelligent-service-luis) to automatically derive intent from your queries and use those to direct your searches intelligently.
+In the continuation of this lab throughout the course, we'll show you how to query your data, and then build a [Bot Framework](https://dev.botframework.com/) bot to query it.
 
 ![Architecture Diagram](../images/AI_Immersion_Arch.png)
 
-## Lab 2.2: Resources
+## Lab 1.2: Resources
 
-There are some directories in the [main](https://github.com/MicrosoftLearning/AI-100-Design-Implement-Azure-AISol/blob/master/Lab2-Implement_Computer_Vision/) github repo folder:
+There are some directories under the `C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab2-Implement_Computer_Vision` folder in your virtual machine:
 
 - **sample_images**: Some sample images to use in testing your implementation of Cognitive Services.
 
@@ -36,7 +35,7 @@ There are some directories in the [main](https://github.com/MicrosoftLearning/AI
 
   - **Finished**: A finished project that you will make use of to implement computer vision and work with the images in this lab.
 
-## Lab 2.3: Image Processing
+## Lab 1.3: Image Processing
 
 ### Cognitive Services
 
@@ -56,9 +55,15 @@ Let's talk about how we're going to call Cognitive Services in our application b
 
 ### Image Processing Library
 
-1. Open the **code/Finished/ImageProcessing.sln** solution
+1. From virtual machine, open the **C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab2-Implement_Computer_Vision\code\Finished\ImageProcessing.sln** solution in Visual Studio.
 
-1. Within your `ImageProcessing` solution you'll find the `ProcessingLibrary` project. It serves as a wrapper around several services. This specific PCL contains some helper classes (in the ServiceHelpers folder) for accessing the Computer Vision API and an "ImageInsights" class to encapsulate the results.
+ 2. When prompted how to open the file click on **visual studio 2019** and then click **ok**
+
+ 2. When prompted how to open the file click on **visual studio 2019** and then click **ok**
+
+ 3. When prompted to sign-in, please press sign-in and enter your respective azure credentials from the lab environment details tab and after signed-in, close the sign-in prompt tab:
+
+Within your `ImageProcessing` solution you'll find the `ProcessingLibrary` project. It serves as a wrapper around several services. This specific PCL contains some helper classes (in the ServiceHelpers folder) for accessing the Computer Vision API and an "ImageInsights" class to encapsulate the results.
 
     ![Processing Library PCL](../images/ProcessingLibrary.png)
 
@@ -78,7 +83,7 @@ Let's talk about how we're going to call Cognitive Services in our application b
 
 1. Now let's take a step back for a minute. It isn't quite as simple as creating the "ImageInsights" class and copying over some methods/error handling from service helpers. We still have to call the API and process the images somewhere. For the purpose of this lab, we are going to walk through `ImageProcessor.cs`to understand how it is being used. In future projects, feel free to add this class to your PCL and start from there (it will need modification depending what Cognitive Services you are calling and what you are processing - images, text, voice, etc.).
 
-## Lab 2.4: Review ImageProcessor.cs
+## Lab 1.4: Review ImageProcessor.cs
 
 1. Navigate to **ImageProcessor.cs** within `ProcessingLibrary`.
 
@@ -160,7 +165,7 @@ Let's talk about how we're going to call Cognitive Services in our application b
 
 Azure Cosmos DB is Microsoft's resilient NoSQL PaaS solution and is incredibly useful for storing loosely structured data like we have with our image metadata results. There are other possible choices (Azure Table Storage, SQL Server), but Cosmos DB gives us the flexibility to evolve our schema freely (like adding data for new services), query it easily, and can be quickly integrated into Azure Cognitive Search (which we'll do in a later lab).	
 
-## Lab 2.5 (optional): Understanding CosmosDBHelper	
+## Lab 1.5 (optional): Understanding CosmosDBHelper	
 
 Cosmos DB is not a focus of this lab, but if you're interested in what's going on - here are some highlights from the code we will be using:	
 
@@ -172,20 +177,19 @@ Cosmos DB is not a focus of this lab, but if you're interested in what's going o
 
     - Once all of that is complete, we can store our image - first the actual image into Blob Storage using our `BlobStorageHelper` instance, and then the `ImageMetadata` into Cosmos DB using our `CosmosDBHelper` instance. If the document already existed (based on our previous check), we should update the existing document. Otherwise, we should be creating a new one.	
 
-## Lab 2.6: Loading Images Using TestCLI	
+## Lab 1.6: Loading Images Using TestCLI	
 
 We will implement the main processing and storage code as a command-line/console application because this allows you to concentrate on the processing code without having to worry about event loops, forms, or any other UX related distractions. Feel free to add your own UX later.	
 1. In the **TestCLI** project, open the **settings.json** file	
-1. Add your specific environment settings from [Lab1-Technical_Requirements.md](../Lab1-Technical_Requirements/02-Technical_Requirements.md)	
+1. Get your specific environment settings from azure portal for example azure cosmosdb endpoint and primary key for EndpointURI and Key, same for azure storage and cognitive service.	
 
-    > **Note** the url for cognitive services should end with **/vision/v1.0** for the project oxford apis.  For example 'ENDPOINT/vision/v1.0`.
-    > ENDPOINT url can be found in your created Cognitive Services blade "RESOURCE MANAGEMENT" "Keys and EndPoint"
+> **Note** the url for cognitive services should end with **/vision/v1.0** for the project oxford apis.  For example `https://westus2.api.cognitive.microsoft.com/vision/v1.0`.
 
 1. If you have not already done so, build the project	
 1. Open a command prompt and navigate to the build directory for the **TestCLI** project.  It should something like **{GitHubDir}\Lab2-Implement_Computer_Vision\code\Finished\TestCLI**.
 
     > **NOTE** Do not navigate to the debug directory	
-    > **NOTE** .net core 3.1 is requred installation can be find here https://dotnet.microsoft.com/download/dotnet-core/3.1 
+> **NOTE** .net core 2.2 is required installation can be find here https://dotnet.microsoft.com/download/dotnet-core/2.2 
 
 1. Run command **dotnet run**	
 
@@ -202,7 +206,7 @@ We will implement the main processing and storage code as a command-line/console
 1. By default, it will load your settings from `settings.json` (it builds it into the `.exe`), but you can provide your own using the `-settings` flag. To load images (and their metadata from Cognitive Services) into your cloud storage, you can just tell _TestCLI_ to `-process` your image directory as follows:	
 
     ```cmd	
-    dotnet run -process "<%GitHubDir%>\AI-100-Design-Implement-Azure-AISol\Lab2-Implement_Computer_Vision\sample_images"	
+    dotnet run -process <%GitHubDir%>\AI-100-Design-Implement-Azure-AISol\Lab2-Implement_Computer_Vision\sample_images	
     ```	
     > **Note** Replace the <%GitHubDir%> value with the folder where you cloned the repository.	
     Once it's done processing, you can query against your Cosmos DB directly using _TestCLI_ as follows:	
@@ -227,6 +231,4 @@ This lab was modified from this [Cognitive Services Tutorial](https://github.com
 - [Portable Class Library (PCL)](https://docs.microsoft.com/en-us/dotnet/standard/cross-platform/cross-platform-development-with-the-portable-class-library)
 - [Intelligent Kiosk sample application](https://github.com/Microsoft/Cognitive-Samples-IntelligentKiosk/tree/master/Kiosk/ServiceHelpers)
 
-## Next Steps
 
-- [Lab 03-01: Basic Filter Bot](../Lab3-Basic_Filter_Bot/01-Introduction.md)

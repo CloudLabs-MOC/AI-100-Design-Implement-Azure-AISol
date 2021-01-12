@@ -1,0 +1,10 @@
+[ {
+  "Name": "Integrate LUIS into Bot Dialogs",
+  "Language": "English",
+  "Files": [
+    {
+      "RawFilePath": "Lab7-Integrate_LUIS/02-LUIS_Integrate_Bot.md",
+      "Order": 1
+    }
+  ]
+} ]
