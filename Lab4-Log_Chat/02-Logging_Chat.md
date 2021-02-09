@@ -1,4 +1,4 @@
-# Lab 4: Log Chats
+# Lab 2: Log Chats
 
 ## Introduction
 
@@ -9,11 +9,11 @@ This workshop demonstrates how you can perform logging using Microsoft Bot Frame
 
 ## Prerequisites
 
-This lab starts from the assumption that you have built and published the bot from [Lab 3](../Lab3-Basic_Filter_Bot/02-Basic_Filter_Bot.md).
+This lab starts from the assumption that you have built and published the bot from Lab1 Basic Filter Bot.
 
 It is recommended that you do that lab in order to be able to implement logging as covered in this lab. If you have not, reading carefully through all the exercises and looking at some of the code or using it in your own applications may be sufficient, depending on your needs.
 
-## Lab 4.0: Intercepting and analyzing messages
+## Lab 2.0: Intercepting and analyzing messages
 
 In this lab, we'll look at some different ways that the Bot Framework allows us to intercept and log data from conversations that the bot has with users. To start we will utilize the In Memory storage, this is good for testing purposes, but not ideal for production environments.
 
@@ -23,7 +23,7 @@ Afterwards, we'll look at a very simple implementation of how we can write data 
 
 Let's take a look and what information we can glean, for testing purposes, without adding anything to our bot.
 
-1. Open your **PictureBot.sln** in Visual Studio.
+1. Open your **PictureBot.sln** in Visual Studio that you were using in the previous lab.
 
     > **Note** You can use the **Starter** solution if you did not do Lab 3.
 
@@ -49,15 +49,9 @@ Let's take a look and what information we can glean, for testing purposes, witho
 
 You can read more about testing, debugging, and logging with the emulator [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-debug-emulator?view=azure-bot-service-4.0).
 
-## Lab 4.1: Logging to Azure Storage
+## Lab 2.1: Logging to Azure Storage
 
 The default bot storage provider uses in-memory storage that gets disposed of when the bot is restarted. This is good for testing purposes only. If you want to persist data but do not want to hook your bot up to a database, you can use the Azure storage provider or build your own provider using the SDK.
-
-1. Open the **Startup.cs** file.  Since we want to use this process for every message, we'll use the `ConfigureServices` method in our Startup class to add storing information to an Azure Blob file. Notice that currently we're using:
-
-    ```csharp
-    IStorage dataStore = new MemoryStorage();
-    ```
 
     As you can see, our current implementation is using in-memory storage. Again, this memory storage is recommended for local bot debugging only. When the bot is restarted, anything stored in memory will be gone.
 
@@ -117,7 +111,7 @@ The default bot storage provider uses in-memory storage that gets disposed of wh
     {"$type":"System.Collections.Concurrent.ConcurrentDictionary`2[[System.String, System.Private.CoreLib],[System.Object, System.Private.CoreLib]], System.Collections.Concurrent","DialogState":{"$type":"Microsoft.Bot.Builder.Dialogs.DialogState, Microsoft.Bot.Builder.Dialogs","DialogStack":{"$type":"System.Collections.Generic.List`1[[Microsoft.Bot.Builder.Dialogs.DialogInstance, Microsoft.Bot.Builder.Dialogs]], System.Private.CoreLib","$values":[{"$type":"Microsoft.Bot.Builder.Dialogs.DialogInstance, Microsoft.Bot.Builder.Dialogs","Id":"mainDialog","State":{"$type":"System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.Object, System.Private.CoreLib]], System.Private.CoreLib","options":null,"values":{"$type":"System.Collections.Generic.Dictionary`2[[System.String, System.Private.CoreLib],[System.Object, System.Private.CoreLib]], System.Private.CoreLib"},"instanceId":"f80db88d-cdea-4b47-a3f6-a5bfa26ed60b","stepIndex":0}}]}},"PictureBotAccessors.PictureState":{"$type":"Microsoft.PictureBot.PictureState, PictureBot","Greeted":"greeted","Search":"","Searching":"no"}}
     ```
 
-## Lab 4.2: Logging utterances to a file
+## Lab 2.2: Logging utterances to a file
 
 For the purposes of this lab, we are going to focus on the actual utterances that users are sending to the bot. This could be useful to determine what types of conversations and actions users are trying to complete with the bot.
 
@@ -149,12 +143,6 @@ We can do this by updating what we're storing in our `UserData` object in the **
 
     The final thing we have to do before we run the bot is add messages to our list with our `OnTurn` action.
 
-1. In **PictureState.cs** add the new field after `Searching` declaration
-
-    ```csharp
-        public List<string> UtteranceList { get; private set; } = new List<string>();
-    ```
-
 1. In **PictureBot.cs**, **after** the following code:
 
     ```csharp
@@ -184,10 +172,3 @@ We can do this by updating what we're storing in our `UserData` object in the **
 
     >Get stuck or broken? You can find the solution for the lab up until this point under [/code/PictureBot-FinishedSolution-File](./code/PictureBot-FinishedSolution-File). You will need to insert the keys for your Azure Bot Service and your Azure Storage settings in the `appsettings.json` file. We recommend using this code as a reference, not as a solution to run, but if you choose to run it, be sure to add the necessary keys.
 
-## Going further
-
-To incorporate database storage and testing into your logging solution, we recommend the following self-led tutorials that build on this solution : [Storing Data in Cosmos](https://github.com/Azure/LearnAI-Bootcamp/blob/master/lab02.5-logging_chat_conversations/3_Cosmos.md).
-
-## Next Steps
-
-- [Lab 05-01: QnA Maker](../Lab5-QnA/01-Introduction.md)
