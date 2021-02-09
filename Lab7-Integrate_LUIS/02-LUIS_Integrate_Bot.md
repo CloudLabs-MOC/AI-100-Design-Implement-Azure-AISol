@@ -23,10 +23,10 @@ We will have to update our bot in order to use LUIS.  We can do this by modifyin
     ```csharp
     services.AddSingleton((Func<IServiceProvider, PictureBotAccessors>)(sp =>
     {
-        .
-        .
-        .
-        return accessors;
+      var blobConnectionString = Configuration.GetSection("BlobStorageConnectionString")?.Value;
+      var blobContainer = Configuration.GetSection("BlobStorageContainer")?.Value;
+      BlobsStorage dataStore = new BlobsStorage(blobConnectionString, blobContainer);
+      return accessors;
     });
     ```
 
