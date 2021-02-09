@@ -1,4 +1,4 @@
-# Lab 3: Creating a Basic filtering bot
+# Lab 1: Creating a Basic filtering bot
 
 ## Introduction
 
@@ -10,19 +10,17 @@ Be mindful of the following AI Ethics principles when designing and implementing
 1. *Transparency*: Guard against bias and destruction of human dignity
 1. *Ethical Application*: AI must assist humanity and be designed for intelligent privacy
 
-We encourage you to [read more](https://ai-ethics.azurewebsites.net/) about the Ethical considerations when building intelligent apps.
+We encourage you to read more about the Ethical considerations when building intelligent apps.
 
-## Pre-requisites
 
-1. Follow the directions provided in [Lab1-Technical_Requirements.md](../Lab1-Technical_Requirements/02-Technical_Requirements.md) to download the v4 Bot Framework Emulator to enable you to test your bot locally.
 
-## Lab 3.0 Create an Azure Web App Bot
+## Lab 1.0 Create an Azure Web App Bot
 
 A bot created using the Microsoft Bot Framework can be hosted at any publicly-accessible URL.  For the purposes of this lab, we will register our bot using [Azure Bot Service](https://docs.microsoft.com/en-us/bot-framework/bot-service-overview-introduction).
 
 1. Navigate to the [Azure portal](https://portal.azure.com).
 
-1. In the portal, navigate to your resource group, then select **+Add** and search for **bot**.
+1. In the portal, navigate to your resource group, then select **+Add** and search for **web app bot**.
 
 1. Select **Web App Bot**, and select **Create**.
 
@@ -40,9 +38,13 @@ A bot created using the Microsoft Bot Framework can be hosted at any publicly-ac
 
 1. Select **OK**, make sure that **Echo Bot** is displayed.
 
-1. Configure a new App service plan (put it in the same location as your bot)
+1. Now configure a new App service plan by clicking on **App service plan/Location - Configure required settings**.
 
-1. You can choose to turn Application Insights on or off.
+1. On the app service plan pane, click on **+ Create New**
+
+1. Enter App service plan name and select the region as same as that of the web app bot and click ok.
+
+1. Turn Application Insights **off**.
 
 1. **Do not** change or select on **Auto create App ID and password**, we will get to that later.
 
@@ -74,9 +76,9 @@ A bot created using the Microsoft Bot Framework can be hosted at any publicly-ac
 
     ![The basic echo bot response](../images/EchoBot.png)
 
-## Lab 3.1: Creating a simple bot and running it
+## Lab 1.1: Creating a simple bot and running it
 
-1. Open **Visual Studio 2019** or later
+1. Open **Visual Studio 2019**. When prompted to sign-in, please press sign-in and enter your respective azure credentials from the lab environment details tab and after signed-in, close the sign-in prompt tab:
 
 1. Select **Create new project**, search for **bot**.
 
@@ -106,11 +108,15 @@ A bot created using the Microsoft Bot Framework can be hosted at any publicly-ac
     }
     ```
 
+1. After editing the values it should look like the below image:-
+
 1. As you may know, renaming a Visual Studio Solution/Project is a very sensitive task. **Carefully** complete the following tasks so all the names reflect PictureBot instead of EchoBot:
 
 1. Right-click the **Bots/Echobot.cs** file, then select **Rename**, rename the class file to **PictureBot.cs**
 
-1. If you are not prompted then you will need to manually rename the class and then change all references to the class to **PictureBot**.  You will know if you missed one when you attempt to build the project.
+1. If you are not prompted then you will need to manually rename the class and then change all references to the class to **PictureBot**.  You will know if you missed one when you attempt to build the project.Click **Yes** for the pop-up as same as in the below image.
+
+1. After renaming, we will see the PictureBot.cs file in Bots folder.
 
 1. Right-click the project, select **Manage Nuget Packages**
 
@@ -147,6 +153,8 @@ For example, if I say "Hello bot" and the bot responds "Hi, how are you?" that i
 
     * Note the localhost port number for the web page. This should (and must) match the endpoint in your Emulator.
 
+1. The browser will pop-up displaying bot web page as shown in the below image. Please copy the same as mentioned in the image to notepad.
+
     >Get stuck or broken? You can find the solution for the lab up until this point under {GitHubPath}/code/Finished/PictureBot-Part0. The readme file within the solution (once you open it) will tell you what keys you need to add in order to run the solution.
 
 ### Using the Bot Framework Emulator
@@ -162,6 +170,8 @@ To interact with your bot:
 * Enter the url that is displayed on your bot web page
 
 * Enter the AppId and the App Secret your entered into the `appsettings.json`
+
+     >**Note** If you do not enter id and secret values into the bot settings you would also not need to enter the values in the bot emulator
 
 * Select **Save and connect**, then save your .bot file locally
 
@@ -179,7 +189,9 @@ In the Log, you should see something similar to the following:
 
 Note how it says we will bypass ngrok for local addresses. We will not be using ngrok in this workshop, but we would if we were connecting to our published version of the bot, we would do so via the 'production' endpoint. Open the 'production' endpoint and observe the difference between bots in different environments. This can be a useful feature when you're testing and comparing your development bot to your production bot.
 
-You can read more about using the Emulator [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-debug-emulator?view=azure-bot-service-4.0).
+You can read more about using the Emulator [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-debug-emulator?view=azure-bot-service-4.0)
+
+1. Return to visual studio and press **Shift+F5** to stop debugging..
 
 1. Browse around and examine the sample bot code. In particular:
 
@@ -187,9 +199,16 @@ You can read more about using the Emulator [here](https://docs.microsoft.com/en-
 
     * **PictureBot.cs**: The `OnMessageActivityAsync` method is the entry point which waits for a message from the user is where we can react to a message once received and wait for further messages.  We can use `turnContext.SendActivityAsync` to send a message from the bot back to the user.
 
-## Lab 3.2:  Managing state and services
+## Lab 1.2:  Managing state and services
 
 1. Navigate again to the **Startup.cs** file
+
+1. Find the below code
+
+   ```
+   namespace PictureBot
+   {
+   ```
 
 1. Update the list of `using` statements by **adding** the following:
 
@@ -234,7 +253,7 @@ The SDK allows you to write your own middleware or add reusable components of mi
 
 1. Right-click on the **Middleware** folder and select **Add>Existing Item**.
 
-1. Navigate to **{GitHubDir}\Lab3-Basic_Filter_Bot\code\Middleware**, select all three files, and select **Add**
+1. Navigate to **C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab3-Basic_Filter_Bot\code\Middleware**, select all three files, and select **Add**.
 
 1. Add the following variables to your **Startup** class:
 
@@ -347,6 +366,8 @@ In the SDK, an accessor implements the `IStatePropertyAccessor` interface, which
     });
     ```
 
+    >**Note**: You can add the above lines of code anywhere in the **ConfigureServices** method
+
 1. You should see an error (red squiggly) beneath some of the terms. But before fixing them, you may be wondering why we had to create two accessors, why wasn't one enough?
 
     * `DialogState` is a specific accessor that comes from the `Microsoft.Bot.Builder.Dialogs` library. When a message is sent, the Dialog subsystem will call `CreateContext` on the `DialogSet`. Keeping track of this context requires the `DialogState` accessor specifically to get the appropriate dialog state JSON.
@@ -388,7 +409,7 @@ In the SDK, an accessor implements the `IStatePropertyAccessor` interface, which
 
 1. Right-click the project and select **Add->Class**, select a Class file and name it **PictureBotAccessors**
 
-1. Copy the following into it:
+1. Replace the existing code in **PictureBotAccessors.cs** with the following code
 
     ```csharp
     using System;
@@ -449,7 +470,7 @@ In the SDK, an accessor implements the `IStatePropertyAccessor` interface, which
 
 1. Wondering if you configured it correctly? Return to **Startup.cs** and confirm your errors around creating the custom state accessors have been resolved.
 
-## Lab 3.3: Organizing code for bots
+## Lab 1.3: Organizing code for bots
 
 There are many different methods and preferences for developing bots. The SDK allows you to organize your code in whatever way you want. In these labs, we'll organize our conversations into different dialogs, and we'll explore a [MVVM style](https://msdn.microsoft.com/en-us/library/hh848246.aspx) of organizing code around conversations.
 
@@ -696,9 +717,9 @@ Due to time limitations, we will not be walking through creating all the models.
 
 1. Right-click on the **Models** folder and select **Add>Existing Item**.
 
-1. Navigate to **{GitHubDir}\Lab3-Basic_Filter_Bot\code\Models**, select all three files, and select **Add**.
+1. Navigate to **C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab3-Basic_Filter_Bot\code\Models**, select all three files, and select **Add**.
 
-## Lab 3.4: Regex and Middleware
+## Lab 1.4: Regex and Middleware
 
 There are a number of things that we can do to improve our bot.  First of all, we may not want to call LUIS for a simple "search pictures" message, which the bot will get fairly frequently from its users.  A simple regular expression could match this, and save us time (due to network latency) and money (due to cost of calling the LUIS service).
 
@@ -764,7 +785,7 @@ Ultimately, we'll use some middleware to try to understand what users are saying
 
     > Aside: One might argue that the user shouldn't have to type "help" to get a menu of clear options on what the bot can do; rather, this should be the default experience on first contact with the bot.  **Discoverability** is one of the biggest challenges for bots - letting the users know what the bot is capable of doing.  Good [bot design principles](https://docs.microsoft.com/en-us/bot-framework/bot-design-principles) can help.
 
-## Lab 3.5: Running the bot
+## Lab 1.5: Running the bot
 
 ### MainDialog, Again
 
@@ -897,6 +918,10 @@ Let's get down to business. We need to fill out MainDialog within PictureBot.cs 
     >Hint: Use break points to trace matching to case "search", starting from **PictureBot.cs**.
     >Get stuck or broken? You can find the solution for the lab up until this point under [resources/code/Finished](./code/Finished). The readme file within the solution (once you open it) will tell you what keys you need to add in order to run the solution. We recommend using this as a reference, not as a solution to run, but if you choose to run it, be sure to add the necessary keys for your environment.
 
+1. Return to visual studio and press **Shift+F5** to stop debugging.
+
+1. Please save your solution and we will need to access it for the next lab.
+
 ## Resources
 
 * [Bot Builder Basics](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-basics?view=azure-bot-service-4.0&tabs=cs)
@@ -904,6 +929,4 @@ Let's get down to business. We need to fill out MainDialog within PictureBot.cs 
 * [Bot Service Documentation](https://docs.microsoft.com/en-us/azure/bot-service/bot-service-overview-introduction?view=azure-bot-service-4.0)
 * [Deploy your bot](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-deploy-az-cli?view=azure-bot-service-4.0&tabs=newrg)
 
-## Next Steps
 
-* [Lab 04-01: Log Chat](../Lab4-Log_Chat/01-Introduction.md)

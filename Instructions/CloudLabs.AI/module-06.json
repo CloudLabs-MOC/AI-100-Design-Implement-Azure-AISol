@@ -1,0 +1,10 @@
+[ {
+  "Name": "Detect Language",
+  "Language": "English",
+  "Files": [
+    {
+      "RawFilePath": "Lab8-Detect_Language/02-Detect_Language.md",
+      "Order": 1
+    }
+  ]
+} ]

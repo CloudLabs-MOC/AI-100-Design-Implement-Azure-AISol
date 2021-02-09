@@ -1,4 +1,4 @@
-# Lab 6: Implementing the LUIS model
+# Lab 1: Implementing the LUIS model
 
 This hands-on lab guides you through creating a model to enhance the Natural Language Processing capabilities of your applications, using Microsoft's Language Understanding Intelligent Service (LUIS).
 
@@ -26,13 +26,15 @@ As a review, these are the steps you will generally take when creating LUIS appl
   6. [Review endpoint utterances](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/label-suggested-utterances)
   7. [Publish](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/publishapp)
 
-## Lab 6.0: Creating the LUIS service in the portal (optional)
+## Lab 1.0: Creating the LUIS service in the portal (optional)
 
-Creating a LUIS service in the portal is optional. However, if you want to see how to create a free or paid service in the portal, you can follow the steps below.  
+Creating a LUIS service in the portal is optional, as LUIS provides you with a "starter key" that you can use for the labs. However, if you want to see how to create a free or paid service in the portal, you can follow the steps below.  
 
 > **Note** If you ran the pre-req ARM Template, you will already have a cognitive services resource that included the Language Understanding APIs.
 
-1. Open the [Azure Portal](https://portal.azure.com)
+1. From your environment, open a browser and navigate to azure portal -> https://portal.azure.com
+
+1. Sign-in using the Azure credentials provided in the environment details tab. Please use ![](./pics/1_1.png) to copy the value.
 
 1. Select **Create a resource**
 
@@ -40,54 +42,48 @@ Creating a LUIS service in the portal is optional. However, if you want to see h
 
 1. Select **Create**
 
-1. Select your **Subscription** and **Resource group**
+1. Select the available subscription and resource group with name like **ai-100-deploymentID**.
 
-1. For the name, type **{YOURINIT}luisbot**
+1. For the name, type **luisbot**deploymentid or **luisbot**uniqueID.
 
-1. For the **Authoring Resource** location, select a location closest to you.  Not all locations are available for this resource.
+1. Under Authoring Resource, for authoring location select location as WEST US.
 
-1. For the pricing tier, select **Free F0**
+1. For the Authoring pricing tier, select **Free F0** 
 
-1. For your **Prediction Resource** location, set the option that is the same as your resource group location
+1. Under Prediction Resource, select any other location like EAST US, WEST US 2 etc.
 
 1. For the **Prediction pricingtier**, select **Free F0**
 
-1. Select **Review + Create** and then **Create**
+1. Select **Create**
 
 **Note** The Luis AI web site does not allow you to control or publish your Azure based cognitive services resources.  You will need to call the APIs in order to train and publish them.
 
-## Lab 6.1: Adding intelligence to your applications with LUIS
+## Lab 1.1: Adding intelligence to your applications with LUIS
 
 Let's look at how we can use LUIS to add some natural language capabilities. LUIS allows you to map natural language utterances (words/phrases/sentences the user might say when talking to the bot) to intents (tasks or actions the user wants to perform). For our application, we might have several intents: finding pictures, sharing pictures, and ordering prints of pictures, for example. We can give a few example utterances as ways to ask for each of these things, and LUIS will map additional new utterances to each intent based on what it has learned.
 
-  > **Warning**: Though Azure services use IE as the default browser, we do not recommend it for LUIS. You should be able to use Chrome or Firefox for all of the labs. Alternatively, you can download either [Microsoft Edge](https://www.microsoft.com/en-us/download/details.aspx?id=48126) or [Google Chrome](https://www.google.com/intl/en/chrome/).
+> **Warning**: Though Azure services use IE as the default browser, we do not recommend it for LUIS. Please use the browser in your lab environment like microsoft edge.
 
-1. Navigate to [https://www.luis.ai](https://www.luis.ai) (**unless you are located in Europe or Australia***). We will create a new LUIS app to support our bot.
+1. Open a new tab in the same session where the azure portal is signed-in and navigate to [https://www.luis.ai](https://www.luis.ai). We will create a new LUIS app to support our bot.
 
-    > **Note** If you created a key in a **Europe** region, you will need to create your application at [https://eu.luis.ai/](https://eu.luis.ai/). If you created a key in an **Australia** region, you will need to create your application at [https://au.luis.ai/](https://au.luis.ai/). You can read more about the LUIS publishing regions [here](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-reference-regions).
 
-1. Sign in using your Organization or Microsoft account. This should be the same account that you used to create the LUIS key in the previous section.
+1. Click on **Sign In** in the top right-corner. It will automatically sign in with same azure credentials you provided before.
 
-1. Select **Create a LUIS app now**. You should be redirected to a list of your LUIS applications.  If prompted, select **Migrate Later**.  
+1. The following pop-up will appear and select the provided subscription and click on **Select or create an authoring resource**.
 
-1. If this is your first time, you will be asked to agree with service terms of use and select your county.
+1. A pop-window will appear - **Choose an authoring resource**, select the available subscription and for LUIS authoring resource, select the **luisbotdeploymentID-Authoring** and click on **Done**.
 
-    - On next step you need to chose recommended option and link your Azure account with LUIS.
-    - Finally confirm your settings and you will be forwarded to the LUIS App page.
 
-    > **Note**: Notice that there is also an "Import App" next to the "New App" button on [the current page](https://www.luis.ai/applications).  After creating your LUIS application, you have the ability to export the entire app as JSON and check it into source control.  This is a recommended best practice, so you can version your LUIS models as you version your code.  An exported LUIS app may be re-imported using that "Import App" button.  If you fall behind during the lab and want to cheat, you can select the "Import App" button and import the [LUIS model](./code/LUIS/PictureBotLuisModel.json).
 
 1. From the main page, select the **+ New app** button
 
-1. Type a name for your app using similar convention used in the labs of the course.
+1. For Name provide **PictureBotLuisModel**, for culture select **English** and select **Done**.
 
-1. Select a **Culture** and your **Prediction resource**
 
-1. select **Done**.  Close the "How to create an effective LUIS app" dialog.
 
     ![LUIS New App](../images//LuisNewApp.png)
 
-1. In the top navigation, select the **BUILD** link.  Notice there is one intent called "None".  Random utterances that don't map to any of your intents may be mapped to "None".
+1. Close any pop-ups if appears, In the top navigation, select the **BUILD** link.  Notice there is one intent called "None".  Random utterances that don't map to any of your intents may be mapped to "None"
 
     ![LUIS Dashboard](../images//LuisCreateIntent.png)
 
@@ -100,7 +96,7 @@ Let's look at how we can use LUIS to add some natural language capabilities. LUI
 
     Let's create intents for the user requesting each of these.  
 
-1. Select the **+ Create** button.
+1. Select the Intents and then Select the **+ Create** button.
 
 1. Name the first intent **Greeting** and select **Done**.  
 
@@ -166,7 +162,7 @@ Let's look at how we can use LUIS to add some natural language capabilities. LUI
 
 1. Finally add some sample utterances to the "None" intent. This helps LUIS label when things are outside the scope of your application. Add things like "I'm hungry for pizza", "Search videos", etc. You should have about 10-15% of your app's utterances within the None intent.
 
-## Lab 6.2: Training the LUIS model
+## Lab 1.2: Training the LUIS model
 
 We're now ready to train our model. In this exercise, you will perform a simple training operation in order to test your model.  The testing will take place using the built-in testing panel in the LUIS portal.
 
@@ -188,9 +184,11 @@ We're now ready to train our model. In this exercise, you will perform a simple 
     - **Versions**
 
 1. Select **Azure Resources**. This screen is used to manage the URL endpoints used to access the LUIS service.
+
+    > [!NOTE]    > An endpoint named **Starter_Key** is automatically created for testing purposes, and you could use that here - however to use the service in a production environment or inside of an application, you will always want to tie it to a real Language Understanding resource created in Azure.
 1. You should see a **Prediction Resource** and a **Key** resource already created.  If you see the **Prediction Resource**, advance to the next section on **Publish the app**.
 1. If you do not see an existing **Prediction Resource**, select **Add prediction resource**. The **Tenant** will already be selected.
-1. Select your subscription, and the resource you created in the Azure portal earlier and then select **Done** to connect the Language Understanding resource to the LUIS service.
+1. Select your subscription, and the resource with name **luisbotdeploymentID** you created in the Azure portal earlier and then select **Done** to connect the Language Understanding resource to the LUIS service.
 
 ## Publish the app
 
@@ -229,10 +227,6 @@ You can also [test your published endpoint in a browser](https://docs.microsoft.
 If you still have time, spend time exploring the www.luis.ai site. Select "Prebuilt domains" and see [what is already available for you](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-reference-prebuilt-domains). You can also review some of the [other features](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-feature) and [patterns](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-patterns)
 , and check out the [BotBuilder-tools](https://github.com/Microsoft/botbuilder-tools) for creating LUIS models, managing LUIS models, simulating conversations, and more. Later, you may also be interested in [another course that includes how to design LUIS schema](https://aka.ms/daaia).
 
-## Extra Credit
 
-If you wish to attempt to create a LUIS model including Azure Cognitive Search, follow the training on [LUIS models including search](https://github.com/Azure/LearnAI-Bootcamp/tree/master/lab01.5-luis).
 
-## Next Steps
 
-- [Lab 07-01: Integrate LUIS](../Lab7-Integrate_LUIS/01-Introduction.md)
