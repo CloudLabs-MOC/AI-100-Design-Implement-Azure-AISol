@@ -59,24 +59,24 @@ As you can see, our current implementation is using in-memory storage. Again, th
 
 1. First find the below code.
 
-  ```
-  services.AddSingleton<IStorage, MemoryStorage>(sp =>
-  ```
+      ```
+      services.AddSingleton<IStorage, MemoryStorage>(sp =>
+      ```
   
 1. Replace it with the below code :-
 
- ```
- services.AddSingleton<IStorage, BlobsStorage>(sp =>
- ```
+     ```
+     services.AddSingleton<IStorage, BlobsStorage>(sp =>
+     ```
 
 1. Then within the Curly Braces of **services.AddSingleton<IStorage, BlobsStorage>(sp =>** remove the existing code and add the following:-
 
- ```
-    var blobConnectionString = Configuration.GetSection("BlobStorageConnectionString")?.Value;
-    var blobContainer = Configuration.GetSection("BlobStorageContainer")?.Value;
-    BlobsStorage dataStore = new BlobsStorage(blobConnectionString, blobContainer);
-    return dataStore;
- ```
+     ```
+        var blobConnectionString = Configuration.GetSection("BlobStorageConnectionString")?.Value;
+        var blobContainer = Configuration.GetSection("BlobStorageContainer")?.Value;
+        BlobsStorage dataStore = new BlobsStorage(blobConnectionString, blobContainer);
+        return dataStore;
+     ```
 
 1. Switch to the Azure Portal, navigate to your blob storage account
 
