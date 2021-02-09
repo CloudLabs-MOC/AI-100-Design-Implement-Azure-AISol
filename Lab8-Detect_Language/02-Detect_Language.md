@@ -1,18 +1,42 @@
-# Lab 8 - Detect Language
+# Lab 3 - Detect Language
 
 In this lab we are going to integrate language detection ability of cognitive services into our bot.
 
-## Lab 8.1: Retrieve your Cognitive Services url and keys
+## Lab 3.0 : Creating a LUIS APP
 
-1. Open the [Azure Portal](https://portal.azure.com)
+1. Navigate to [https://www.luis.ai](https://www.luis.ai). We will create a new LUIS app to support our bot.
 
-1. Search for **Cognitive Services** using the portal search, select the cognitive services resource that is generic (aka, it contains all end points with the **kind** **CognitiveServices**).
+1. Sign in using the azure credentials provided.You can get the credentials from the **Environment Details** page.
+
+1. In **Welcome to the Language Understanding Intelligent Service (LUIS)!**, select the subscription available and click **Select or create an authoring resource**.
+
+1. On the **My Apps** dashboard, select your **Subscription** and **Authoring resource** from the dropdown menu.
+
+1. To create a new app, click on **+ New app for conversation**, from the dropdown select **New app for conversation**
+
+1. On the **Create new app** page, type a name, description and select Done. Close the "How to create an effective LUIS app" dialog.
+
+1. From the Luisapp dashboard, select the Luis app which we created in the previous lab and click on Manage in the top toolbar.
+
+1. Select Settings from the left hand side menu and copy the App ID value to notepad.
+
+1. From Azure portal, navigate to resource group and select the cognitive service resource that starts with **luisbot**
+
+1. Select Keys and Endpoint from the left hand side menu which is under **Resource Management** and copy the values of **Key1** and **Endpoint** into notepad.
+
+## Lab 3.1: Retrieve your Cognitive Services url and keys
+
+1. Open the Azure Portal https://portal.azure.com
+
+2. Navigate to your resource group, select the cognitive services resource named **cogsmoderator**.
 
 1. Under **RESOURCE MANAGEMENT**, select the **Keys and Endpoint** tab and record the url and the key for the cognitive services resource
 
-## Lab 8.2: Add language support to your bot
+## Lab 3.2: Add language support to your bot
 
-1. If not already open, open your **PictureBot** solution
+1. Please open the **PictureBot** solution from **C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab8-Detect_Language\code\Finished\PictureBot.sln**
+
+      >**Note:** please make sure we are selecting the solution from the finished folder
 
 1. Right-click the project and select **Manage Nuget Packages**
 
@@ -27,7 +51,7 @@ In this lab we are going to integrate language detection ability of cognitive se
     using Azure;
     ```
 
-1. Add the following code to the **ConfigureServices** method:
+6. Check the following code in the **ConfigureServices** method:
 
     ```csharp
     services.AddSingleton<TextAnalyticsClient>(sp =>
@@ -46,13 +70,13 @@ In this lab we are going to integrate language detection ability of cognitive se
     using Azure.AI.TextAnalytics;
     ```
 
-1. Add the following class variable:
+8. Check the following class variable:
 
     ```csharp
     private TextAnalyticsClient _textAnalyticsClient;
     ```
 
-1. Modify the constructor to include the new `TextAnalyticsClient`:
+9. Check the constructor if it includes the new `TextAnalyticsClient`:
 
     ```csharp
     public PictureBot(PictureBotAccessors accessors, LuisRecognizer recognizer, TextAnalyticsClient analyticsClient)
@@ -73,7 +97,7 @@ In this lab we are going to integrate language detection ability of cognitive se
     await _accessors.ConversationState.SaveChangesAsync(turnContext);
     ```
 
-1. Add the following line of code after it
+12. Check if the following line of code after it
 
     ```csharp
     //Check the language
@@ -129,12 +153,28 @@ In this lab we are going to integrate language detection ability of cognitive se
     ```
 
 
-1. Open the **appsettings.json** file and ensure that your cognitive services settings are entered:
+1. Open the **appsettings.json** file and ensure that your cognitive services settings and LUIS app settings are entered:
 
     ```csharp
     "cogsBaseUrl": "",
-    "cogsKey" :  ""
+"cogsKey" :  """
+"luisAppId": "",
+"luisAppKey": "",
+"luisEndPoint": ""
     ```
+
+`Note: For cogsBaseURL and cogsKey , got to azure portal and copy the key and endpoint of cogsmoderator and put key value in cogskey and put endpoint value in cogsBaseURL  and use the values of LUIS app you copied earlier to notepad`
+
+15. Also, add following values that you collected in previous Labs.
+
+```
+  "MicrosoftAppId": "YourAppID", -> mention the application id of the web app bot created earlier.
+  "MicrosoftAppPassword": "YourAppIDKey", -> mention the secret key of the web app bot created earlier.
+  "BlobStorageConnectionString": 
+  "DefaultEndpointsProtocol=https;AccountName=XXXXX;AccountKey=XXXXX;EndpointSuffix=core.windows.net",
+  "BlobStorageContainer": "chatlog"
+
+```
 
 1. Press **F5** to start your bot
 
@@ -145,17 +185,9 @@ In this lab we are going to integrate language detection ability of cognitive se
 - Привет
 - Hello
 
-## Going further
 
-Since we have already introduced you to LUIS in previous labs, think about what changes you may need to make to support multiple languages using LUIS.  Some helpful articles:
 
-- [Language and region support for LUIS](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-language-support)
 
-## Resources
 
-- [Example: Detect language with Text Analytics](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-language-detection)
-- [Quickstart: Text analytics client library for .NET](https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/quickstarts/csharp)
 
-## Next Steps
 
-- [Lab 09-01: Test Bot DirectLine](../Lab9-Test_Bots_DirectLine/01-Introduction.md)

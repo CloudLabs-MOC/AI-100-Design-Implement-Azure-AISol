@@ -48,7 +48,7 @@ Creating a LUIS service in the portal is optional, as LUIS provides you with a "
 
 1. Under Authoring Resource, for authoring location select location as WEST US.
 
-1. For the pricing tier, select **Free F0**
+1. For the Authoring pricing tier, select **Free F0** 
 
 1. Under Prediction Resource, select any other location like EAST US, WEST US 2 etc.
 
