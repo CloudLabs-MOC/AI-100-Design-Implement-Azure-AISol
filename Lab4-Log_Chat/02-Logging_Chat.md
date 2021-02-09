@@ -53,28 +53,30 @@ You can read more about testing, debugging, and logging with the emulator [here]
 
 The default bot storage provider uses in-memory storage that gets disposed of when the bot is restarted. This is good for testing purposes only. If you want to persist data but do not want to hook your bot up to a database, you can use the Azure storage provider or build your own provider using the SDK.
 
-    As you can see, our current implementation is using in-memory storage. Again, this memory storage is recommended for local bot debugging only. When the bot is restarted, anything stored in memory will be gone.
+As you can see, our current implementation is using in-memory storage. Again, this memory storage is recommended for local bot debugging only. When the bot is restarted, anything stored in memory will be gone.
 
 1. Replace the current `IStorage` line with the following to change it to a FileStorage based persistance:
 
-    ```csharp
-      var blobConnectionString = Configuration.GetSection("BlobStorageConnectionString")?.Value;
-      var blobContainer = Configuration.GetSection("BlobStorageContainer")?.Value;
-      BlobsStorage dataStore = new BlobsStorage(blobConnectionString, blobContainer);
-      return dataStore;
-    ```
+1. First find the below code.
 
-1. You also need to fix singleton definition from
+  ```
+  services.AddSingleton<IStorage, MemoryStorage>(sp =>
+  ```
+  
+1. Replace it with the below code :-
 
-    ```csharp
-    services.AddSingleton<IStorage, MemoryStorage>(sp =>
-    ```
+ ```
+ services.AddSingleton<IStorage, BlobsStorage>(sp =>
+ ```
 
-    to
+1. Then within the Curly Braces of **services.AddSingleton<IStorage, BlobsStorage>(sp =>** remove the existing code and add the following:-
 
-    ```csharp
-    services.AddSingleton<IStorage, BlobsStorage>(sp =>
-    ```
+ ```
+    var blobConnectionString = Configuration.GetSection("BlobStorageConnectionString")?.Value;
+    var blobContainer = Configuration.GetSection("BlobStorageContainer")?.Value;
+    BlobsStorage dataStore = new BlobsStorage(blobConnectionString, blobContainer);
+    return dataStore;
+ ```
 
 1. Switch to the Azure Portal, navigate to your blob storage account
 
