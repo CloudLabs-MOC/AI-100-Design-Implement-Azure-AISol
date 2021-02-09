@@ -26,7 +26,7 @@ In this lab we will explore the QnA Maker for creating bots that connect to a pr
 
 1. On the same page under **Azure Search details - for data** enter:
 
- - **Azure search pricing tier** : select the **F** tier
+   - **Azure search pricing tier** : select the **F** tier
 
 1. Now under **App Service details - for runtime** enter the following and select **Review + create**.
 
