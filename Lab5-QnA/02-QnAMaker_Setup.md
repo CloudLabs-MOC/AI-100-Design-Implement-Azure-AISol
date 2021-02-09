@@ -10,45 +10,36 @@ In this lab we will explore the QnA Maker for creating bots that connect to a pr
     * Azure Username/Email: <inject key="AzureAdUserEmail"></inject>
     * Azure Password: <inject key="AzureAdUserPassword"></inject>.
 
-2. Now in the azure portal, select **+ Create a Resource**
+1. Now in the azure portal, select **+ Create a Resource**
 
-3. Type **QnA Maker**, then select **QnA Maker**
+1. Type **QnA Maker**, then select **QnA Maker**
 
-4. Select **Create**
+1. Select **Create**
 
-5. On the create page under **Project details** enter the following details:
+1. On the create page under **Project details** enter the following details:
 
    - **Resource Group** : Select ai-100-deploymentid resource group
 
    - **Name** : Enter a unique name 
 
-6.**Pricing tier** : Select the **S0** tier. We aren't using the free tier because we will upload files that are larger than 1MB later.
+   - **Pricing tier** : Select the **S0** tier. We aren't using the free tier because we will upload files that are larger than 1MB later.
 
-7. On the same page under **Azure Search details - for data** enter:
+1. On the same page under **Azure Search details - for data** enter:
 
  - **Azure search pricing tier** : select the **F** tier
 
-8. Now under **App Service details - for runtime** enter the following and select **Review + create**.
+1. Now under **App Service details - for runtime** enter the following and select **Review + create**.
 
    - **App name** : Enter an app name, it must be unique
 
-9.Select **Create**.  This will create the following resources in your resource group:
+1. Select **Create**.  This will create the following resources in your resource group:
 
-- App Service Plan
-- App Service
-- Application Insights
-- Search Service
-- Cognitive Service instance of type QnAMaker
+   - App Service Plan
+   - App Service
+   - Application Insights
+   - Search Service
+   - Cognitive Service instance of type QnAMaker
 
-10. Disable **App insights**
-
-11. Select **Review + Create** and then **Create**. This will create the following resources in your resource group:
-
-    - App Service Plan
-    - App Service
-    - Application Insights
-    - Search Service
-    - Cognitive Service instance of type QnAMaker
 
 ## Lab 1.2: Create a KnowledgeBase
 
@@ -125,12 +116,6 @@ In this lab we will explore the QnA Maker for creating bots that connect to a pr
 
     [!NOTE] The previous steps for reviewing the generated code are correct for the solution that was downloaded during the authoring of this lab.  The solution files may change from time to time based on updates to the frameworks and SDKs so the solution files may differ.  The key aspect here is just have you review the code that is automatically generated from the tool.
 
-## Going Further
-
-
 ## Resources
 
 - [What is the QnA Maker service?](https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/overview/overview)
-
-## Next Steps
-
