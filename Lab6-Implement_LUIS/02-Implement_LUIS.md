@@ -54,8 +54,6 @@ Creating a LUIS service in the portal is optional, as LUIS provides you with a "
 
 1. For the **Prediction pricingtier**, select **Free F0**
 
-1. For the prediction pricing tier, select **Free F0**
-
 1. Select **Create**
 
 **Note** The Luis AI web site does not allow you to control or publish your Azure based cognitive services resources.  You will need to call the APIs in order to train and publish them.
