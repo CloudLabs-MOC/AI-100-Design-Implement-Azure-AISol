@@ -80,13 +80,19 @@ As you can see, our current implementation is using in-memory storage. Again, th
 
 1. Switch to the Azure Portal, navigate to your blob storage account
 
+    ![](./4.png)
+
 1. From the **Overview** tab, click **Containers**
 
 1. Check if a **chatlog** container exists, if it does not click **+Container**:
 
     - For the name, type **chatlog**, click **OK**
+    
+    ![](./5.png)
 
 1. If you haven't already done so, click **Access keys** and record your connection string
+
+   ![](./6.png)
 
 1. Open the **appsettings.json** and add your blob connection string details:
 
