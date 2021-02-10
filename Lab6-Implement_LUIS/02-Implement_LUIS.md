@@ -36,9 +36,15 @@ Creating a LUIS service in the portal is optional, as LUIS provides you with a "
 
 1. Sign-in using the Azure credentials provided in the environment details tab. Please use ![](./pics/1_1.png) to copy the value.
 
+  ![](./pics/1.png)
+
 1. Select **Create a resource**
 
+  ![](./pics/2.png)
+
 1. Enter **Language Understanding** in the search box and choose **Language Understanding**
+
+  ![](./pics/3.png)
 
 1. Select **Create**
 
@@ -71,21 +77,25 @@ Let's look at how we can use LUIS to add some natural language capabilities. LUI
 
 1. The following pop-up will appear and select the provided subscription and click on **Select or create an authoring resource**.
 
+  ![](./pics/ai-lab6-new1.png)
+
 1. A pop-window will appear - **Choose an authoring resource**, select the available subscription and for LUIS authoring resource, select the **luisbotdeploymentID-Authoring** and click on **Done**.
 
-
+  ![](./pics/ai-lab6-new2.png)
 
 1. From the main page, select the **+ New app** button
 
+  ![](./pics/5.png)
+
 1. For Name provide **PictureBotLuisModel**, for culture select **English** and select **Done**.
 
-
+  ![](./pics/6.png)
 
     ![LUIS New App](../images//LuisNewApp.png)
 
 1. Close any pop-ups if appears, In the top navigation, select the **BUILD** link.  Notice there is one intent called "None".  Random utterances that don't map to any of your intents may be mapped to "None"
 
-    ![LUIS Dashboard](../images//LuisCreateIntent.png)
+    ![](./pics/7.png)
 
     We want our bot to be able to do the following things:
 
@@ -98,15 +108,21 @@ Let's look at how we can use LUIS to add some natural language capabilities. LUI
 
 1. Select the Intents and then Select the **+ Create** button.
 
-1. Name the first intent **Greeting** and select **Done**.  
+  ![](./pics/8.png)
+
+1. Name the first intent **Greeting** and select **Done**.
+
+  ![](./pics/9.png)
 
 1. Give several examples of things the user might say when greeting the bot, pressing "Enter" after each one.
 
-    ![LUIS Greeting Intent](../images//LuisGreetingIntent.png)
+    ![](./pics/11.png)
 
     Let's see how to create an entity.  When the user requests to search the pictures, they may specify what they are looking for.  Let's capture that in an entity.
 
-1. Select on **Entities** in the left-hand column and then select **+ Create**.  
+1. Select on **Entities** in the left-hand column and then select **+ Create**.
+
+  ![](./pics/12.png)
 
 1. Give it an entity name **facet**
 
@@ -114,7 +130,7 @@ Let's look at how we can use LUIS to add some natural language capabilities. LUI
 
 1. Select **Create**.
 
-    ![Adding an entity named facet, of type Simple](../images/select-facet.png)
+    ![](./pics/13.png)
 
 1. Select **Intents** in the left-hand sidebar and then click the **+ Create** button.  
 
@@ -135,11 +151,11 @@ Let's look at how we can use LUIS to add some natural language capabilities. LUI
 
 1. Hover and click the word (or click consecutive words to select a group of words) and then select the "facet" entity.
 
-    ![Labeling Entity](../images//LuisFacet.png)
+    ![](./pics/14.png)
 
     So your utterances may become something like this when facets are labeled:
 
-    ![Add Facet Entity](../images//SearchPicsIntentAfter.png)
+    ![](./pics/15_1.png)
 
     >**Note** This workshop does not include Azure Cognitive Search, however, this functionality has been left in for the sake of demonstration.
 
@@ -150,6 +166,8 @@ Let's look at how we can use LUIS to add some natural language capabilities. LUI
       - Share this pic
       - Can you tweet that?
       - Post to Twitter
+      
+      ![](./pics/16.png)
 
     - Create another intent named **"OrderPic"**.  This could be communicated with utterances like:
 
@@ -157,6 +175,8 @@ Let's look at how we can use LUIS to add some natural language capabilities. LUI
       - I would like to order prints
       - Can I get an 8x10 of that one
       - Order wallets
+      
+      ![](./pics/17.png)
 
     When choosing utterances, it can be helpful to use a combination of questions, commands, and "I would like to..." formats.
 
@@ -170,6 +190,8 @@ We're now ready to train our model. In this exercise, you will perform a simple 
 
     > [!TIP]
     > Training is not always immediate. Sometimes it gets queued and can take several minutes.
+    
+    ![](./pics/17_1.png)
 
 ## Create a public endpoint for the LUIS service
 
@@ -188,7 +210,12 @@ We're now ready to train our model. In this exercise, you will perform a simple 
     > [!NOTE]    > An endpoint named **Starter_Key** is automatically created for testing purposes, and you could use that here - however to use the service in a production environment or inside of an application, you will always want to tie it to a real Language Understanding resource created in Azure.
 1. You should see a **Prediction Resource** and a **Key** resource already created.  If you see the **Prediction Resource**, advance to the next section on **Publish the app**.
 1. If you do not see an existing **Prediction Resource**, select **Add prediction resource**. The **Tenant** will already be selected.
+
+  ![](./pics/18_1.png)
+  
 1. Select your subscription, and the resource with name **luisbotdeploymentID** you created in the Azure portal earlier and then select **Done** to connect the Language Understanding resource to the LUIS service.
+
+  ![](./pics/18.png)
 
 ## Publish the app
 
@@ -196,10 +223,14 @@ We're now ready to train our model. In this exercise, you will perform a simple 
 
    > [!NOTE]
    > You can publish to your **Production** or **Staging** endpoint. Select **Production**, and read about the reasons for the two endpoints.
+   
+   ![](./pics/19.png)
 
 1. Under **Choose your publishing slot and settings**, select **Production Slot** and then select **Done**.
 
     Publishing creates an endpoint to call the LUIS model. The endpoint URL will be displayed. Copy the endpoint URL and add it to your list of keys for future use.
+    
+    ![](./pics/20.png)
 
 1. In the top bar, select **Test**. Try typing a few utterances and see which intents are returned. Here are some examples you can try:
 
@@ -208,14 +239,24 @@ We're now ready to train our model. In this exercise, you will perform a simple 
    | **Show me pictures of a local beach** | Returns the **SearchPic** intent with a score | Positive match |
    | **Hello** | Returns the **Greeting** intent with a score | Fairly positive match |
    | **Send to Tom** | Returns the **Utilities** with a low score | Needs retraining or doesn't match any intents |
+   
+   ![](./pics/21.png)
 
 To retrain the model for utterances with low scores, take the following steps:
 
 1. Beside the low-scoring utterance (in this case, **Send to Tom**), select **Inspect**.
+
+  ![](./pics/22.png)
+  
 1. Beside **Top-scoring intent**, select **Assign to new intent** and then in the drop-down and choose **SharePic** from the list.
+
+  ![](./pics/23.png)
+  
 1. Close the **Test** panel.
 1. Select the **Train** button to retrain your model.
 1. Test the **Send to Tom** utterance again. It should now return the **SharePic** intent with a higher score.
+
+  ![](./pics/24.png)
 
 Your LUIS app is now ready to be used by client applications, tested in a browser through the listed endpoint, or integrated into a bot.
 
