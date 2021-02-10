@@ -29,9 +29,9 @@ There are some directories under the `C:\AllFiles\AI-100-Design-Implement-Azure-
 
   ![](media/filepath.jpg)
 
-- **sample_images**: Some sample images to use in testing your implementation of Cognitive Services.
+  - **sample_images**: Some sample images to use in testing your implementation of Cognitive Services.
 
-- **code**: In here, there are two directories. Each folder contains a solution (.sln) that has several different projects for the lab.
+  - **code**: In here, there are two directories. Each folder contains a solution (.sln) that has several different projects for the lab.
 
   - **Starter**: A starter project, which you can use if you want to learn about creating the code that is used in the project.
 
@@ -61,27 +61,27 @@ Let's talk about how we're going to call Cognitive Services in our application b
 
   ![](media/filepath-image-sln.jpg)
 
- 1. When prompted how to open the file click on **visual studio 2019** and then click **ok**
+2. When prompted how to open the file click on **visual studio 2019** and then click **ok**
  
   ![](media/select-visual-studio.jpg)
 
- 1. When prompted to sign-in, please press sign-in and enter your respective azure credentials from the lab environment details tab and after signed-in, close the sign-in prompt tab:
+3. When prompted to sign-in, please press sign-in and enter your respective azure credentials from the lab environment details tab and after signed-in, close the sign-in prompt tab:
  
    ![](media/sign-in-prompt.jpg) 
    
    ![](media/env-details.jpg)
 
-1. Within your `ImageProcessing` solution you'll find the `ProcessingLibrary` project. It serves as a wrapper around several services. This specific PCL contains some helper classes (in the ServiceHelpers folder) for accessing the Computer Vision API and an "ImageInsights" class to encapsulate the results.
+4. Within your `ImageProcessing` solution you'll find the `ProcessingLibrary` project. It serves as a wrapper around several services. This specific PCL contains some helper classes (in the ServiceHelpers folder) for accessing the Computer Vision API and an "ImageInsights" class to encapsulate the results.
 
     ![](media/processing-sln-image.jpg)
 
-1. You should be able to pick up this portable class library and drop it in your other projects that involve Cognitive Services (some modification will be required depending on which Cognitive Services you want to use).
+5. You should be able to pick up this portable class library and drop it in your other projects that involve Cognitive Services (some modification will be required depending on which Cognitive Services you want to use).
 
 **ProcessingLibrary: Service Helpers**
 
 1. Service helpers can be used to make your life easier when you're developing your app. One of the key things that service helpers do is provide the ability to detect when the API calls return a call-rate-exceeded error and automatically retry the call (after some delay). They also help with bringing in methods, handling exceptions, and handling the keys.
 
-1. You can find additional service helpers for some of the other Cognitive Services within the [Intelligent Kiosk sample application](https://github.com/Microsoft/Cognitive-Samples-IntelligentKiosk/tree/master/Kiosk/ServiceHelpers). Utilizing these resources makes it easy to add and remove the service helpers in your future projects as needed.
+2. You can find additional service helpers for some of the other Cognitive Services within the [Intelligent Kiosk sample application](https://github.com/Microsoft/Cognitive-Samples-IntelligentKiosk/tree/master/Kiosk/ServiceHelpers). Utilizing these resources makes it easy to add and remove the service helpers in your future projects as needed.
 
 **ProcessingLibrary: The "ImageInsights" class**
 
@@ -89,9 +89,9 @@ Let's talk about how we're going to call Cognitive Services in our application b
 
   ![](media/image-insights.jpg)
 
-1. You can see that there are properties for `Caption` and `Tags` from the images, as well as a unique `ImageId`. "ImageInsights" collects  the information from the Computer Vision API.
+2. You can see that there are properties for `Caption` and `Tags` from the images, as well as a unique `ImageId`. "ImageInsights" collects  the information from the Computer Vision API.
 
-1. Now let's take a step back for a minute. It isn't quite as simple as creating the "ImageInsights" class and copying over some methods/error handling from service helpers. We still have to call the API and process the images somewhere. For the purpose of this lab, we are going to walk through `ImageProcessor.cs`to understand how it is being used. In future projects, feel free to add this class to your PCL and start from there (it will need modification depending what Cognitive Services you are calling and what you are processing - images, text, voice, etc.).
+3. Now let's take a step back for a minute. It isn't quite as simple as creating the "ImageInsights" class and copying over some methods/error handling from service helpers. We still have to call the API and process the images somewhere. For the purpose of this lab, we are going to walk through `ImageProcessor.cs`to understand how it is being used. In future projects, feel free to add this class to your PCL and start from there (it will need modification depending what Cognitive Services you are calling and what you are processing - images, text, voice, etc.).
 
 ## Lab 1.4: Review ImageProcessor.cs
 
@@ -99,7 +99,7 @@ Let's talk about how we're going to call Cognitive Services in our application b
 
   ![](media/image-processor.jpg)
 
-1. Note the following [`using` directives](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive) **to the top** of the class, above the namespace:
+2. Note the following [`using` directives](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/using-directive) **to the top** of the class, above the namespace:
 
     ```csharp
     using System;
@@ -112,7 +112,7 @@ Let's talk about how we're going to call Cognitive Services in our application b
 
     [Project Oxford](https://blogs.technet.microsoft.com/machinelearning/tag/project-oxford/) was the project where many Cognitive Services got their start. As you can see, the NuGet Packages were even labeled under Project Oxford. In this scenario, we'll call `Microsoft.ProjectOxford.Vision` for the Computer Vision API. Additionally, we'll reference our service helpers (remember, these will make our lives easier). You'll have to reference different packages depending on which Cognitive Services you're leveraging in your application.
 
-1. In **ImageProcessor.cs** we start by utliziling a method to process the image, `ProcessImageAsync`. The code will utilize asynchronous processing because it will utilize services to perform the actions.
+3. In **ImageProcessor.cs** we start by utliziling a method to process the image, `ProcessImageAsync`. The code will utilize asynchronous processing because it will utilize services to perform the actions.
 
     ```csharp
     public static async Task<ImageInsights> ProcessImageAsync(string imgPath, string imageId)
@@ -142,7 +142,7 @@ Let's talk about how we're going to call Cognitive Services in our application b
 
 1. Next, we want to call the Cognitive Service (specifically Computer Vision) and put the results in `imageAnalysisResult`.
 
-1. We use the code below to call the Computer Vision API (with the help of `VisionServiceHelper.cs`) and store the results in `imageAnalysisResult`. Near the bottom of `VisionServiceHelper.cs`, you will want to review the available methods for you to call (`RunTaskWithAutoRetryOnQuotaLimitExceededError`, `DescribeAsync`, `AnalyzeImageAsync`, `RecognizeTextAsyncYou`). You will use the AnalyzeImageAsync method in order to return the visual features.
+2. We use the code below to call the Computer Vision API (with the help of `VisionServiceHelper.cs`) and store the results in `imageAnalysisResult`. Near the bottom of `VisionServiceHelper.cs`, you will want to review the available methods for you to call (`RunTaskWithAutoRetryOnQuotaLimitExceededError`, `DescribeAsync`, `AnalyzeImageAsync`, `RecognizeTextAsyncYou`). You will use the AnalyzeImageAsync method in order to return the visual features.
 
     ```csharp
     var imageAnalysisResult = await VisionServiceHelper.AnalyzeImageAsync(imgPath, DefaultVisualFeaturesList);
@@ -150,7 +150,7 @@ Let's talk about how we're going to call Cognitive Services in our application b
 
     Now that we've called the Computer Vision service, we want to create an entry in "ImageInsights" with only the following results: ImageId, Caption, and Tags (you can confirm this by revisiting `ImageInsights.cs`).
 
-1. The following code below accomplishes this.
+3. The following code below accomplishes this.
 
     ```csharp
     ImageInsights result = new ImageInsights
@@ -163,17 +163,17 @@ Let's talk about how we're going to call Cognitive Services in our application b
 
     So now we have the caption and tags that we need from the Computer Vision API, and each image's result (with imageId) is stored in "ImageInsights".
 
-1. Lastly, we need to close out the method by using the following line at the end of the method:
+4. Lastly, we need to close out the method by using the following line at the end of the method:
 
     ```csharp
     return result;
     ```
 
-1. In order to use this application, we need to build the project, press **Ctrl-Shift-B**, of select the **Build** menu and choose **Build Solution**.
+5. In order to use this application, we need to build the project, press **Ctrl-Shift-B**, of select the **Build** menu and choose **Build Solution**.
 
   ![](media/build-solution.jpg)
 
-1. Work with your instructor to fix any errors.
+6. Work with your instructor to fix any errors.
 
 ### Exploring Cosmos DB	
 
@@ -185,7 +185,7 @@ Cosmos DB is not a focus of this lab, but if you're interested in what's going o
 
 1. Navigate to the `CosmosDBHelper.cs` class in the `ImageStorageLibrary` project. Review the code and the comments. Many of the implementations used can be found in the [Getting Started guide](https://docs.microsoft.com/en-us/azure/cosmos-db/documentdb-get-started).	
 
-1. Go to the `TestCLI` project's `Util.cs` file and review  the `ImageMetadata` class (code and comments). This is where we turn the `ImageInsights` we retrieve from Cognitive Services into appropriate Metadata to be stored into Cosmos DB.	
+2. Go to the `TestCLI` project's `Util.cs` file and review  the `ImageMetadata` class (code and comments). This is where we turn the `ImageInsights` we retrieve from Cognitive Services into appropriate Metadata to be stored into Cosmos DB.	
 
     - Finally, look in `Program.cs` in `TestCLI` and at  `ProcessDirectoryAsync`. First, we check if the image and metadata have already been uploaded - we can use `CosmosDBHelper` to find the document by ID and to return `null` if the document doesn't exist. Next, if we've set `forceUpdate` or the image hasn't been processed before, we'll call the Cognitive Services using `ImageProcessor` from the `ProcessingLibrary` and retrieve the `ImageInsights`, which we add to our current `ImageMetadata`.  	
 
@@ -193,39 +193,41 @@ Cosmos DB is not a focus of this lab, but if you're interested in what's going o
 
 ## Lab 1.6: Loading Images Using TestCLI	
 
-We will implement the main processing and storage code as a command-line/console application because this allows you to concentrate on the processing code without having to worry about event loops, forms, or any other UX related distractions. Feel free to add your own UX later.	
+We will implement the main processing and storage code as a command-line/console application because this allows you to concentrate on the processing code without having to worry about event loops, forms, or any other UX related distractions. Feel free to add your own UX later.
+
 1. In the **TestCLI** project, open the **settings.json** file	
+
 2. Get your specific environment settings from azure portal for example azure cosmosdb endpoint and primary key for EndpointURI and Key, same for azure storage and cognitive service.)	
 
 > **Note** the url for cognitive services should end with **/vision/v1.0** for the project oxford apis.  For example `https://westus2.api.cognitive.microsoft.com/vision/v1.0`..
 
-1. Values shown in the image below are needed to be changed.
+3. Values shown in the image below are needed to be changed.
 
   ![](media/setting-json.jpg)
 
-1. To get the necessary items,navigate to your azure portal using the azure credentials from environment details tab. Then find the respective ones as shown in the below images:-
+4. To get the necessary items,navigate to your azure portal using the azure credentials from environment details tab. Then find the respective ones as shown in the below images:-
 
-i) To get the cognitive services details, navigate to **cogscompvis** from resource group **ai-100-{uniqueid}** and get the keys and endpoint as shown below :-
+  i) To get the cognitive services details, navigate to **cogscompvis** from resource group **ai-100-{uniqueid}** and get the keys and endpoint as shown below :-
 
   ![](media/cog-comp-vision.jpg)
 
-ii) To retrieve storage account values, navigate to storage account **aistorage-{uniqueid}** from resource group **ai-100-{uniqueid}** and get the connection string as shown below, click on **Show Keys** to copy the value of connection string:-
+  ii) To retrieve storage account values, navigate to storage account **aistorage-{uniqueid}** from resource group **ai-100-{uniqueid}** and get the connection string as shown below, click on **Show Keys** to copy the value of connection string:-
 
   ![](media/storage-accesskey.jpg)
 
-iii) To retrieve cosmosdb values, navigate to **cosmodb-{uniqueid}** from resource group **ai-100-{uniqueid}** and get the URI and primary key as shown below:-
+  iii) To retrieve cosmosdb values, navigate to **cosmodb-{uniqueid}** from resource group **ai-100-{uniqueid}** and get the URI and primary key as shown below:-
 
   ![](media/cosmo-db.jpg)
 
-1. After updating the values, build the project	
+5. After updating the values, build the project	
 
-1. Open a command prompt and navigate to the build directory for the **TestCLI** project.  It should something like **cd C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab2-Implement_Computer_Vision\code\Finished\TestCLI**
+6. Open a command prompt and navigate to the build directory for the **TestCLI** project.  It should something like **cd C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab2-Implement_Computer_Vision\code\Finished\TestCLI**
 
 > **NOTE** Do not navigate to the debug directory	
 
 > **NOTE** .net core 2.2 is required installation can be find here https://dotnet.microsoft.com/download/dotnet-core/2.2 
 
-1. Run the following command
+7. Run the following command
 
    **dotnet run**	
 
@@ -242,7 +244,7 @@ iii) To retrieve cosmosdb values, navigate to **cosmodb-{uniqueid}** from resour
     
   ![](media/command-promt-1.jpg)
 
-1. By default, it will load your settings from `settings.json` (it builds it into the `.exe`), but you can provide your own using the `-settings` flag. To load images (and their metadata from Cognitive Services) into your cloud storage, you can just tell _TestCLI_ to `-process` your image directory as follows:	
+8. By default, it will load your settings from `settings.json` (it builds it into the `.exe`), but you can provide your own using the `-settings` flag. To load images (and their metadata from Cognitive Services) into your cloud storage, you can just tell _TestCLI_ to `-process` your image directory as follows:	
 
     ```cmd	
     dotnet run -- -process C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab2-Implement_Computer_Vision\sample_images
@@ -250,7 +252,7 @@ iii) To retrieve cosmosdb values, navigate to **cosmodb-{uniqueid}** from resour
     
   ![](media/processing-output.jpg)
   
-1. Once it's done processing, you can query against your Cosmos DB directly using _TestCLI_ as follows:	
+9. Once it's done processing, you can query against your Cosmos DB directly using _TestCLI_ as follows:	
 
     ```cmd	
     dotnet run -query "select * from images"	
@@ -258,7 +260,7 @@ iii) To retrieve cosmosdb values, navigate to **cosmodb-{uniqueid}** from resour
     
   ![](media/command-prompt-2.jpg)
 
-1. Take some time to look through the sample images (you can find them in /sample_images) and compare the images to the results in your application.	
+10. Take some time to look through the sample images (you can find them in /sample_images) and compare the images to the results in your application.	
 
     > **Note** You can also browse the results in the CosmosDb resource in Azure.  Open the resource, then select **Data Explorer**.  Expand the **metadata** database, then select the **items** node.  You will see several json documents that contains your results.
     
