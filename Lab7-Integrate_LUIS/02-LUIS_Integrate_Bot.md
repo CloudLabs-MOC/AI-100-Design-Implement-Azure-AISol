@@ -52,6 +52,7 @@ We will have to update our bot in order to use LUIS.  We can do this by modifyin
         return new LuisRecognizer(recognizerOptions);
     });
     ```
+    ![](./pics/4_1.png)
 
 1. Modify the **appsettings.json** to include the following properties, be sure to fill them in with your LUIS instance values:
 
@@ -63,10 +64,22 @@ We will have to update our bot in order to use LUIS.  We can do this by modifyin
 
 
 1. Also please provide value for **BlobStorageConnectionString": "",** , you can navigate in the right side and click on environment details tab and can find the value for it.
+
+    ![](./pics/ai-100-lab7-new1.png)
+    
 1. To find the luisAppId, Navigate to the cognitive services website and then go to Manage -> Settings and copy the application Id
+
+    ![](./pics/5.png)
+    
 1. For Luis app key and endpoint, Navigate to cognitive services - **luisbotdeploymentID** in azure portal , then find **Keys and Endpoint** and copy any one key value and the endpoint value.
+
+    ![](./pics/7.png)
+    
 1. Provide the blob connection string, navigate to the storage account - **aistorageuniqueid** go to access keys and click on show keys and copy the connection string. Leave MicrosoftAppID and MicrosoftAppPassword Blank.
+
 1. After editing the **appsettings.json**, it will look like the below image.
+
+    ![](./pics/6.png)
 
 ## Lab 2.2: Adding LUIS to PictureBot's MainDialog
 
@@ -180,20 +193,32 @@ Another thing to note is that after every response that called LUIS, we're addin
 
 1. Press **F5** to run the app. The localhost will pop-up in the default browser and copy the endpoint URL as shown in the below image.
 
+    ![](./pics/bot_1_1.png)
+
 1. Switch to your Bot Emulator. Try sending the bots different ways of searching pictures. What happens when you say "send me pictures of water" or "show me dog pics"? Try some other ways of asking for, sharing and ordering pictures. For this follow the below instructions.
 1. Open the bot emulator from the desktop.
 
 1. Click on **Create a new bot configuration**.
 
+    ![](./pics/bot_2.png)
+
 1. Enter the bot name and the endpoint url you copied in the first step of this particular process. Click **Save And Connect**.
+
+    ![](./pics/bot_3.png)
 
 1. Save the config file to the local computer.
 
+    ![](./pics/bot_4.png)
+
 1. The bot will appear and you can search for the utterences. First the chat could be blank, please type something for eg. HI and send.
+
+    ![](./pics/last_1.png)
 
 1. Try sending the bots different ways of searching pictures. What happens when you say "send me pictures of water" or "show me dog pics"? Try some other ways of asking for, sharing and ordering pictures.
 
 1. If you send "show me dog pics".Then the output will be like the image below :-
+
+    ![](./pics/last_2.png)
 
 If you have extra time, see if there are things LUIS isn't picking up on that you expected it to. Maybe now is a good time to go to luis.ai, [review your endpoint utterances](https://docs.microsoft.com/en-us/azure/cognitive-services/LUIS/label-suggested-utterances), and retrain/republish your model.
 
