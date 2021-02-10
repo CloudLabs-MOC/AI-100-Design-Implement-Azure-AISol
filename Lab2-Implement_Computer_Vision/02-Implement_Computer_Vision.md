@@ -219,7 +219,7 @@ iii) To retrieve cosmosdb values, navigate to **cosmodb-{uniqueid}** from resour
 
 1. After updating the values, build the project	
 
-1. Open a command prompt and navigate to the build directory for the **TestCLI** project.  It should something like **cd C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab2-Implement_Computer_Vision\code\Finished\TestCLI**.
+1. Open a command prompt and navigate to the build directory for the **TestCLI** project.  It should something like **cd C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab2-Implement_Computer_Vision\code\Finished\TestCLI**
 
 > **NOTE** Do not navigate to the debug directory	
 
@@ -245,7 +245,7 @@ iii) To retrieve cosmosdb values, navigate to **cosmodb-{uniqueid}** from resour
 1. By default, it will load your settings from `settings.json` (it builds it into the `.exe`), but you can provide your own using the `-settings` flag. To load images (and their metadata from Cognitive Services) into your cloud storage, you can just tell _TestCLI_ to `-process` your image directory as follows:	
 
     ```cmd	
-    dotnet run -- -process C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab2-Implement_Computer_Vision\sample_image	
+    dotnet run -- -process C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab2-Implement_Computer_Vision\sample_images
     ```	
     
   ![](media/processing-output.jpg)
