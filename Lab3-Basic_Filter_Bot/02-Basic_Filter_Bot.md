@@ -22,7 +22,13 @@ A bot created using the Microsoft Bot Framework can be hosted at any publicly-ac
 
 1. In the portal, navigate to your resource group, then select **+Add** and search for **web app bot**.
 
+    ![Bot template area is highlighted and the language and bot type is selected.](../images/rg.jpg 'Select the bot type')
+    
+    ![](./1.png)
+
 1. Select **Web App Bot**, and select **Create**.
+
+    ![](./2.png)
 
 1. For the name, you'll have to create a unique identifier. We recommend using something along the lines of PictureBot[i][n] where [i] is your initials and [n] is a number (e.g. mine would be PictureBotamt6).
 
@@ -32,17 +38,25 @@ A bot created using the Microsoft Bot Framework can be hosted at any publicly-ac
 
 1. Select the Bot template area
 
+    ![](./4.png)
+
 1. Select **C#**, then select **Echo Bot**, later we will update it to our our PictureBot.
 
-    ![Bot template area is highlighted and the language and bot type is selected.](../images/lab02-createbot.png 'Select the bot type')
+    ![](./5.png)
 
 1. Select **OK**, make sure that **Echo Bot** is displayed.
 
 1. Now configure a new App service plan by clicking on **App service plan/Location - Configure required settings**.
 
+    ![](./6.png)
+
 1. On the app service plan pane, click on **+ Create New**
 
+    ![](./7.png)
+
 1. Enter App service plan name and select the region as same as that of the web app bot and click ok.
+
+    ![](./8.png)
 
 1. Turn Application Insights **off**.
 
@@ -50,15 +64,21 @@ A bot created using the Microsoft Bot Framework can be hosted at any publicly-ac
 
 1. Select **Create**
 
+    ![](./9.png)
+
 1. When it's deployed, navigate to the new Azure Web App Bot Resource.
+
+    ![](./10.png)
 
 1. Under **Bot Management**, select **Settings**
 
 1. Select the **Manage** link for the **Microsoft App ID**
 
-    ![Select the Manage link](../images/ManageBot.png)
+    ![](./11.png)
 
 1. Select **New client secret**
+
+    ![](./12.png)
 
 1. For the name, type **PictureBot**
 
@@ -66,15 +86,21 @@ A bot created using the Microsoft Bot Framework can be hosted at any publicly-ac
 
 1. Select **Add**
 
+    ![](./13.png)
+
 1. Record the secret into notepad or similar for later use in the lab(s).
 
+    ![](./14.png)
+
 1. Select **Overview**, record the application id into notepad or similar for later use in the lab(s).
+
+    ![](./15_1.png)
 
 1. Navigate back to the **web app bot** resource, under **Bot management**, select the **Test in Web Chat** tab
 
 1. Once it starts, explore what it is capable of doing.  As you will see, it only echos back your message.
 
-    ![The basic echo bot response](../images/EchoBot.png)
+    ![](./16.png)
 
 ## Lab 1.1: Creating a simple bot and running it
 
@@ -87,13 +113,15 @@ A bot created using the Microsoft Bot Framework can be hosted at any publicly-ac
     >**[!CAUTION]**
     >Depending on the version of Visual Studio installed, the below screenshot may be different from your own.  If you see multiple versions listed for the Echo Bot template, choose **version 3.1** and not version 2.1.
 
-    ![Select the Echo Bot project template](../images/NewBotProject.png)
+    ![Select the Echo Bot project template](./18.png)
 
 1. Select **Next**
 
     > **Note** If you do not see the Echo Bot template, you need to install the Visual Studio add-in from the pre-req steps.
 
 1. For the name, type **PictureBot**, select **Create**
+
+    ![](./19_new.png)
 
 1. Spend some time looking at all of the different things that are generated from the Echo Bot template. We won't spend time explaining every single file, but we **highly recommend** spending some time **later** working through and reviewing this sample (and the other Web App Bot sample - Basic Bot), if you have not already. It contains important and useful shells needed for bot development. You can find it and other useful shells and samples [here](https://github.com/Microsoft/BotBuilder-Samples).
 
@@ -110,13 +138,19 @@ A bot created using the Microsoft Bot Framework can be hosted at any publicly-ac
 
 1. After editing the values it should look like the below image:-
 
+    ![](./20.png)
+
 1. As you may know, renaming a Visual Studio Solution/Project is a very sensitive task. **Carefully** complete the following tasks so all the names reflect PictureBot instead of EchoBot:
 
 1. Right-click the **Bots/Echobot.cs** file, then select **Rename**, rename the class file to **PictureBot.cs**
 
 1. If you are not prompted then you will need to manually rename the class and then change all references to the class to **PictureBot**.  You will know if you missed one when you attempt to build the project.Click **Yes** for the pop-up as same as in the below image.
 
+    ![](./21.png)
+
 1. After renaming, we will see the PictureBot.cs file in Bots folder.
+
+    ![](./22.png)
 
 1. Right-click the project, select **Manage Nuget Packages**
 
@@ -129,6 +163,8 @@ A bot created using the Microsoft Bot Framework can be hosted at any publicly-ac
     * Azure.AI.TextAnalytics
 
 1. Build the solution.
+
+    ![](./27.png)
 
     >**TIP**:  If you only have one monitor and you would like to easily switch between instructions and Visual Studio, you can now add the instruction files to your Visual Studio solution by right-clicking on the project in Solution Explorer and selecting **Add > Existing Item**. Navigate to "Lab2," and add all the files of type "MD File."
 
@@ -155,6 +191,8 @@ For example, if I say "Hello bot" and the bot responds "Hi, how are you?" that i
 
 1. The browser will pop-up displaying bot web page as shown in the below image. Please copy the same as mentioned in the image to notepad.
 
+    ![](./29.png)
+
     >Get stuck or broken? You can find the solution for the lab up until this point under {GitHubPath}/code/Finished/PictureBot-Part0. The readme file within the solution (once you open it) will tell you what keys you need to add in order to run the solution.
 
 ### Using the Bot Framework Emulator
@@ -163,7 +201,11 @@ To interact with your bot:
 
 * Launch the Bot Framework Emulator (note we are using the v4 Emulator).  Select **Start**, then search for **Bot Emulator**.
 
+    ![](./bot_1.png)
+
 * On the welcome page, select **Create a new bot configuration**
+    
+    ![](./31.png)
 
 * For the name, type **PictureBot**
 
@@ -174,6 +216,8 @@ To interact with your bot:
      >**Note** If you do not enter id and secret values into the bot settings you would also not need to enter the values in the bot emulator
 
 * Select **Save and connect**, then save your .bot file locally
+
+    ![](./32.png)
 
 * You should now be able to converse with the bot.
 
@@ -222,10 +266,16 @@ You can read more about using the Emulator [here](https://docs.microsoft.com/en-
     using Microsoft.Extensions.Options;
     using Microsoft.Extensions.Logging;
     using PictureBot.Bots;
-
+    using Microsoft.PictureBot;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.Bot.Builder.Azure.Blobs;
+    using Azure.AI.TextAnalytics;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Bot.Builder.AI.Luis;
     using Microsoft.Bot.Builder.Dialogs;
     using Microsoft.Bot.Builder.Azure.Blobs;
+    using Azure;
     ```
 
     We won't use all of the above namespaces just yet, but can you guess when we might?
@@ -249,11 +299,17 @@ Middleware is simply a class or set of classes that sit between the adapter and 
 
 The SDK allows you to write your own middleware or add reusable components of middleware created by others. Every activity coming in or out of your bot flows through your middleware. We'll get deeper into this later in the lab, but for now, it's important to understand that every activity flows through your middleware, because it is located in the `ConfigureServices` method that gets called at run time (which runs in between every message being sent by a user and `OnMessageActivityAsync`).
 
-1. Add a new folder called **Middleware**
+1. Add a new folder called **Middleware**. Right-Click on the PictureBot project and Go-to **Add** and then click on **New Folder**.
+
+    ![](./newFolder.png)
 
 1. Right-click on the **Middleware** folder and select **Add>Existing Item**.
+    
+    ![](./existing_item.png)
 
 1. Navigate to **C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab3-Basic_Filter_Bot\code\Middleware**, select all three files, and select **Add**.
+
+    ![](./36.png)
 
 1. Add the following variables to your **Startup** class:
 
@@ -379,6 +435,10 @@ In the SDK, an accessor implements the `IStatePropertyAccessor` interface, which
 1. Now back to the errors you're seeing. You've said you're going to store this information, but you haven't yet specified where or how. We have to update "PictureState.cs" and "PictureBotAccessor.cs" to have and access the information we want to store.
 
 1. Right-click the project and select **Add->Class**, select a Class file and name it **PictureState**
+
+   ![](./41.png)
+   
+   ![](./42.png)
 
 1. Copy the following code into **PictureState.cs**.
 
@@ -507,6 +567,9 @@ Since we only have two dialogs, we can keep it simple and put them in the Pictur
     using Microsoft.Bot.Schema;
     using Microsoft.PictureBot;
     using PictureBot.Responses;
+    using Microsoft.Extensions.Logging;
+    using Azure.AI.TextAnalytics;
+    using Microsoft.Bot.Builder.AI.Luis;
     ```
 
 You've just added access to your Models/Responses, as well as to the services LUIS and Azure Cognitive Search. Finally, the Newtonsoft references will help you parse the responses from LUIS, which we will see in a subsequent lab.
@@ -716,6 +779,8 @@ So before we fill out our dialogs, we need to have some responses ready. Remembe
 Due to time limitations, we will not be walking through creating all the models. They are straightforward, but we recommend taking some time to review the code within after you've added them. 
 
 1. Right-click on the **Models** folder and select **Add>Existing Item**.
+
+    ![](./43.png)
 
 1. Navigate to **C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab3-Basic_Filter_Bot\code\Models**, select all three files, and select **Add**.
 
