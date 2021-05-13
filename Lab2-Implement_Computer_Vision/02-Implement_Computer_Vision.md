@@ -57,7 +57,7 @@ Let's talk about how we're going to call Cognitive Services in our application b
 
 ### Image Processing Library
 
-1. From virtual machine, open the **C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab2-Implement_Computer_Vision\code\Finished\ImageProcessing.sln** solution in Visual Studio.
+1. From virtual machine, open the **`C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab2-Implement_Computer_Vision\code\Finished\ImageProcessing.sln`** solution in Visual Studio.
 
   ![](media/filepath-image-sln.jpg)
 
@@ -221,15 +221,21 @@ We will implement the main processing and storage code as a command-line/console
 
 5. After updating the values, build the project	
 
-6. Open a command prompt and navigate to the build directory for the **TestCLI** project.  It should something like **cd C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab2-Implement_Computer_Vision\code\Finished\TestCLI**
+6. Open a command prompt and navigate to the build directory for the **TestCLI** project by running the following command.
+ 
+   ```cd C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab2-Implement_Computer_Vision\code\Finished\TestCLI```
 
 > **NOTE** Do not navigate to the debug directory	
 
 > **NOTE** .net core 2.2 is required installation can be find here https://dotnet.microsoft.com/download/dotnet-core/2.2 
 
-7. Run the following command
+7. Now run the following command :
 
-   **dotnet run**	
+   ```cmd
+   dotnet run
+   ```	
+
+> You will see the following as output
 
     ```cmd	
     Usage:  [options]	
