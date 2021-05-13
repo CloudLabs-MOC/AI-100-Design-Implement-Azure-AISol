@@ -143,11 +143,7 @@ In this lab we will explore the QnA Maker for creating bots that connect to a pr
 
 ## Lab 1.4: Download the Bot Source code
 
-1. Under **Bot management**, select the **Build** tab
-
-   ![](./images/img24.png)
-
-1. Select **Download Bot source code**, when prompted select **Yes**.  
+1. On the **Web App Bot** page, select **Download Bot source code**, when prompted select **Yes**.  
 
    ![](./images/img25.png)
    
