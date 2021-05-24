@@ -13,7 +13,7 @@ We will have to update our bot in order to use LUIS.  We can do this by modifyin
 
 ### Adding LUIS to Startup.cs
 
-1. Open the PictureBot solution from C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab7-Integrate_LUIS\code\Starter\PictureBot\PictureBot.sln
+1. Open the PictureBot solution from **```C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab7-Integrate_LUIS\code\Starter\PictureBot\PictureBot.sln```***
 
 
 1. Open **Startup.cs** and locate the `ConfigureServices` method. We'll add LUIS here by adding an additional service for LUIS after creating and registering the state accessors.
@@ -21,15 +21,18 @@ We will have to update our bot in order to use LUIS.  We can do this by modifyin
     Below:
 
     ```csharp
-    services.AddSingleton((Func<IServiceProvider, PictureBotAccessors>)(sp =>
-    {
-      var blobConnectionString = Configuration.GetSection("BlobStorageConnectionString")?.Value;
-      var blobContainer = Configuration.GetSection("BlobStorageContainer")?.Value;
-      BlobsStorage dataStore = new BlobsStorage(blobConnectionString, blobContainer);
-      return accessors;
+        // Create the custom state accessor.
+        // State accessors enable other components to read and write individual properties of state.
+        return new PictureBotAccessors(conversationState)
+        {
+            PictureState = conversationState.CreateProperty<PictureState>(PictureBotAccessors.PictureStateName),
+            DialogStateAccessor = conversationState.CreateProperty<DialogState>("DialogState"),
+        };
     });
     ```
-
+    
+    **After Line 136**
+    
     Add:
 
     ```csharp
@@ -113,6 +116,8 @@ We will have to update our bot in order to use LUIS.  We can do this by modifyin
     _recognizer = recognizer ?? throw new ArgumentNullException(nameof(recognizer));
     ```
 
+    ![](./pics/combined-code.png)
+
     > Again, this should look very similar to how we initialized the instance of `_accessors`.
 
 As far as updating our `MainDialog` goes, there's no need for us to add anything to the initial `GreetingAsync` step, because regardless of user input, we want to greet the user when the conversation starts.
@@ -128,6 +133,8 @@ As far as updating our `MainDialog` goes, there's no need for us to add anything
             return await stepContext.EndDialogAsync();
         }
     ```
+    
+    ![](./pics/default155.png)
 
     With:
 
@@ -174,6 +181,7 @@ As far as updating our `MainDialog` goes, there's no need for us to add anything
         return await stepContext.EndDialogAsync();
     }
     ```
+    ![](./pics/default-after-replace.png)
 
 1. In the same method `MainMenuAsync` let's delete block of empty dialog to avoid confusion. Find following code and delete it:
 
@@ -182,6 +190,7 @@ As far as updating our `MainDialog` goes, there's no need for us to add anything
             // switch to the search dialog
             return await stepContext.BeginDialogAsync("searchDialog", null, cancellationToken);
     ```
+    ![](./pics/remove-search.png)
 
 Let's briefly go through what we're doing in the new code additions. First, instead of responding saying we don't understand, we're going to call LUIS. So we call LUIS using the LUIS Recognizer, and we store the Top Intent in a variable. We then use `switch` to respond in different ways, depending on which intent is picked up. This is almost identical to what we did with Regex.
 
@@ -202,7 +211,7 @@ Another thing to note is that after every response that called LUIS, we're addin
 
     ![](./pics/bot_2.png)
 
-1. Enter the bot name and the endpoint url you copied in the first step of this particular process. Click **Save And Connect**.
+1. Enter the bot name **luisbotDID** and the endpoint url you copied in the first step of this particular process. Click **Save And Connect**.
 
     ![](./pics/bot_3.png)
 
@@ -229,7 +238,3 @@ If you have extra time, see if there are things LUIS isn't picking up on that yo
 If you're having trouble customizing your LUIS implementation, review the documentation guidance for adding LUIS to bots [here](https://docs.microsoft.com/en-us/azure/bot-service/bot-builder-howto-v4-luis?view=azure-bot-service-4.0&tabs=cs).
 
 >Get stuck or broken? You can find the solution for the lab up until this point under [code/Finished](./code/Finished). You will need to insert the keys for your Azure Bot Service in the `appsettings.json` file. We recommend using this code as a reference, not as a solution to run, but if you choose to run it, be sure to add the necessary keys (in this section, there shouldn't be any).
-
-
-
-
