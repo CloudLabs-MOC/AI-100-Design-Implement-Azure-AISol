@@ -48,19 +48,23 @@ Creating a LUIS service in the portal is optional, as LUIS provides you with a "
 
 1. Select **Create**
 
+1. Under **Create Options** select **Both**
+
 1. Select the available subscription and resource group with name like **ai-100-deploymentID**.
 
-1. For the name, type **luisbot**deploymentid or **luisbot**uniqueID.
+1. For the name, type **luisbotDID**.
 
-1. Under Authoring Resource, for authoring location select location as WEST US.
+>**Note!** Where DID is your unique deployment ID which can be found under the environment details tab. 
 
-1. For the Authoring pricing tier, select **Free F0** 
+1. Under Authoring Resource, for authoring location select location as **WEST US**.
 
-1. Under Prediction Resource, select any other location like EAST US, WEST US 2 etc.
+1. For the **Authoring pricing tier**, select **Free F0** 
 
-1. For the **Prediction pricingtier**, select **Free F0**
+1. Under Prediction Resource, select any other location like **EAST US, WEST US 2 etc**.
 
-1. Select **Create**
+1. For the **Prediction pricing tier**, select **Free F0**
+
+1. Select **Review + Create**
 
 **Note** The Luis AI web site does not allow you to control or publish your Azure based cognitive services resources.  You will need to call the APIs in order to train and publish them.
 
@@ -110,7 +114,7 @@ Let's look at how we can use LUIS to add some natural language capabilities. LUI
 
   ![](./pics/8.png)
 
-1. Name the first intent **Greeting** and select **Done**.
+1. Name the first intent **Greetings** and select **Done**.
 
   ![](./pics/9.png)
 
@@ -267,7 +271,3 @@ You can also [test your published endpoint in a browser](https://docs.microsoft.
 
 If you still have time, spend time exploring the www.luis.ai site. Select "Prebuilt domains" and see [what is already available for you](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-reference-prebuilt-domains). You can also review some of the [other features](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-feature) and [patterns](https://docs.microsoft.com/en-us/azure/cognitive-services/luis/luis-concept-patterns)
 , and check out the [BotBuilder-tools](https://github.com/Microsoft/botbuilder-tools) for creating LUIS models, managing LUIS models, simulating conversations, and more. Later, you may also be interested in [another course that includes how to design LUIS schema](https://aka.ms/daaia).
-
-
-
-
