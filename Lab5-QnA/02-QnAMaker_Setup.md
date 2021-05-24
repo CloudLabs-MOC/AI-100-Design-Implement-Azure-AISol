@@ -24,11 +24,13 @@ In this lab we will explore the QnA Maker for creating bots that connect to a pr
 
 1. On the create page under **Project details** enter the following details:
 
-   - **Resource Group** : Select **ai-100-deploymentid** resource group
+   - **Resource Group** : Select **ai-100-DID** resource group
 
    - **Name** : Enter **QndAmakerDID**
 
    - **Pricing tier** : Select the **S0** tier. We aren't using the free tier because we will upload files that are larger than 1MB later.
+
+   > **Note**  Where DID is your unique deployment ID, which can be found under the environment details tab. 
    
    ![](./images/img4.png)
 
@@ -40,7 +42,7 @@ In this lab we will explore the QnA Maker for creating bots that connect to a pr
 
 1. Now under **App Service details - for runtime** enter the following and select **Review + create**.
 
-   - **App name** : Enter an app name, it must be unique
+   - **App name** : Enter **QndAmakerDID**
    
    ![](./images/img6.png)
 
