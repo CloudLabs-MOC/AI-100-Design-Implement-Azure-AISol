@@ -24,9 +24,9 @@ In this lab we will explore the QnA Maker for creating bots that connect to a pr
 
 1. On the create page under **Project details** enter the following details:
 
-   - **Resource Group** : Select ai-100-deploymentid resource group
+   - **Resource Group** : Select **ai-100-deploymentid** resource group
 
-   - **Name** : Enter a unique name 
+   - **Name** : Enter **QndAmakerDID**
 
    - **Pricing tier** : Select the **S0** tier. We aren't using the free tier because we will upload files that are larger than 1MB later.
    
@@ -78,13 +78,13 @@ In this lab we will explore the QnA Maker for creating bots that connect to a pr
    ![](./images/img11.png)
 
 
-1. For the file, select **Add file**, browse to the **C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab5-QnA/surface-pro-4-user-guide-EN.pdf** file and click on open.
+1. For the file, select **Add file**, browse to the **```C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab5-QnA/surface-pro-4-user-guide-EN.pdf```** file and click on open.
 
    ![](./images/img12.png)
    
    ![](./images/img13.png)
 
-1. For the file, again select **Add file**, browse to the **C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab5-QnA/Manage Azure Blob Storage** file and click on open.
+1. For the file, again select **Add file**, browse to the **```C:\AllFiles\AI-100-Design-Implement-Azure-AISol-master\Lab5-QnA/Manage Azure Blob Storage```** file and click on open.
 
    ![](./images/img15.png)
    
@@ -119,6 +119,10 @@ In this lab we will explore the QnA Maker for creating bots that connect to a pr
 1. If prompted, login as the account tied to your lab resource group.
 
 1. On the bot service creation page, fix any naming errors, then select **Create**.
+
+   - **Name** : Enter **qndamakerDID-bot**
+   
+   > **Note**  Where DID is your unique deployment ID, which can be found under the environment details tab. 
 
    ![](./images/img21.png)
 
